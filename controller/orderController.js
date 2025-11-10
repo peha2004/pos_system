@@ -77,21 +77,24 @@ const OrderController = {
     },
 
     loadOrders() {
+        const orders = OrderModel.getAll();  
         const tbody = $('#ordersTable');
         tbody.empty();
-        DB.orders.forEach(o => {
+
+        orders.forEach(o => {
             const itemSummary = o.items.map(i => `${i.name}(${i.qty})`).join(', ');
             tbody.append(`
-                <tr>
-                    <td>${o.id}</td>
-                    <td>${o.date}</td>
-                    <td>${o.customer}</td>
-                    <td>${itemSummary}</td>
-                    <td>${o.total.toFixed(2)}</td>
-                </tr>
-            `);
+            <tr>
+                <td>${o.id}</td>
+                <td>${o.date}</td>
+                <td>${o.customer}</td>
+                <td>${itemSummary}</td>
+                <td>${o.total.toFixed(2)}</td>
+            </tr>
+        `);
         });
-        $('#statOrders').text(DB.orders.length);
+
+        $('#statOrders').text(orders.length);
     },
 
     refreshCustomerDropdown() {
