@@ -77,7 +77,7 @@ const OrderController = {
     },
 
     loadOrders() {
-        const orders = OrderModel.getAll();  
+        const orders = OrderModel.getAll();
         const tbody = $('#ordersTable');
         tbody.empty();
 
