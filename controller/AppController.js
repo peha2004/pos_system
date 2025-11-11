@@ -6,27 +6,58 @@ const AppController = {
         this.autoLoginIfSession();
     },
     bindLogin() {
-        $('#loginForm').on('submit', (e) => {
+        const loginForm = $('#loginForm');
+        const logoutButton = $('#btnLogout');
+
+        loginForm.on('submit', (e) => {
             e.preventDefault();
-            const user = $('#loginUsername').val().trim();
-            const pass = $('#loginPassword').val().trim();
-            if (user === 'admin' && pass === 'password') {
-                sessionStorage.setItem('pos_user', user);
-                this.startApp(user);
+            const usernameInput = $('#loginUsername').val().trim();
+            const passwordInput = $('#loginPassword').val().trim();
+
+            const VALID_USERNAME = 'admin';
+            const VALID_PASSWORD = 'password';
+
+            if (usernameInput === VALID_USERNAME && passwordInput === VALID_PASSWORD) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                    text: 'Welcome back to POS System!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    sessionStorage.setItem('pos_user', usernameInput);
+                    this.startApp(usernameInput);
+                });
             } else {
-                alert('Invalid credentials');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: 'Invalid username or password. Please try again.',
+                });
             }
         });
-
-        $('#btnLogout').on('click', () => {
-            sessionStorage.removeItem('pos_user');
-            location.reload();
+        logoutButton.on('click', () => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will be logged out of the system.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log me out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.showLogin();
+                    $('#loginForm')[0].reset();
+                    Swal.fire('Logged Out!', 'You have been successfully logged out.', 'success');
+                }
+            });
         });
     },
 
     autoLoginIfSession() {
-        const u = sessionStorage.getItem('pos_user');
-        if (u) this.startApp(u);
+        const user = sessionStorage.getItem('pos_user');
+        if (user) this.startApp(user);
     },
 
     startApp(user) {
@@ -39,6 +70,12 @@ const AppController = {
         ItemController.init();
         OrderController.init();
         SectionController.refreshDashboard();
+    },
+
+    showLogin() {
+        $('#view-app').addClass('hidden');
+        $('#view-login').removeClass('hidden');
+        sessionStorage.removeItem('pos_user');
     }
 };
 
