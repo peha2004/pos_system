@@ -3,10 +3,15 @@ const DB = {
     items: [],
     orders: [],
     nextCustomerId: 1,
+    nextItemCode: 4,
 
     nextCustomerIdGen() {
         return 'C' + (this.nextCustomerId++).toString().padStart(3, '0');
     },
+    nextItemCodeGen() {
+        return 'I' + (this.nextItemCode++).toString().padStart(3, '0');
+    },
+
     nextOrderIdGen() {
         return 'O' + Date.now();
     },
