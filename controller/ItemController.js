@@ -7,7 +7,10 @@ const ItemController = {
 
     bindEvents() {
         $('#btnAddItem').on('click', () => {
-            $('#itemCodeInput, #itemName, #itemPrice, #itemQty').val('');
+            const newCode = DB.nextItemCodeGen();
+            $('#itemCodeInput').val(newCode).prop('disabled', true);
+            $('#itemName, #itemPrice, #itemQty').val('');
+            $('#modalItem').find('.modal-title').text('Add Item');
             new bootstrap.Modal($('#modalItem')).show();
         });
 
@@ -20,9 +23,11 @@ const ItemController = {
             if (!code || !name || isNaN(price) || isNaN(qty)) return;
 
             const existing = DB.items.find(i => i.code === code);
-            if (existing) ItemModel.update(code, { name, price, qty });
-            else ItemModel.add(new ItemDTO(code, name, price, qty));
-
+            if (existing) {
+                ItemModel.update(code, { name, price, qty });
+            } else {
+                ItemModel.add(new ItemDTO(code, name, price, qty));
+            }
             bootstrap.Modal.getInstance($('#modalItem')).hide();
             this.loadItems();
             SectionController.refreshDashboard();
@@ -33,10 +38,11 @@ const ItemController = {
             const code = $(e.currentTarget).data('code');
             const item = DB.items.find(i => i.code === code);
             if (item) {
-                $('#itemCodeInput').val(item.code);
+                $('#itemCodeInput').val(item.code).prop('disabled', true);
                 $('#itemName').val(item.name);
                 $('#itemPrice').val(item.price);
                 $('#itemQty').val(item.qty);
+                $('#modalItem').find('.modal-title').text('Edit Item');
                 new bootstrap.Modal($('#modalItem')).show();
             }
         });
