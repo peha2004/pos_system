@@ -13,13 +13,13 @@ const DB = {
 
     seed() {
         this.customers = [
-            { id: this.nextCustomerIdGen(), name: 'Ranuthi', contact: '0771234567', address: 'Colombo' },
-            { id: this.nextCustomerIdGen(), name: 'Pehansa', contact: '0719876543', address: 'Kandy' }
+            new CustomerDTO(this.nextCustomerIdGen(), 'Ranuthi', '0771234567', 'Colombo'),
+            new CustomerDTO(this.nextCustomerIdGen(), 'Pehansa', '0719876543', 'Kandy')
         ];
         this.items = [
-            { code: 'I001', name: 'Pen', price: 20.0, qty: 100 },
-            { code: 'I002', name: 'Notebook', price: 150.0, qty: 50 },
-            { code: 'I003', name: 'Bottle', price: 450.0, qty: 20 }
+            new ItemDTO('I001', 'Pen', 20.0, 100),
+            new ItemDTO('I002', 'Notebook', 150.0, 50),
+            new ItemDTO('I003', 'Bottle', 450.0, 20)
         ];
     }
 };
