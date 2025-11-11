@@ -36,6 +36,10 @@ const CustomerController = {
 
             bootstrap.Modal.getInstance($('#modalCustomer')).hide();
             this.refresh();
+
+            if (typeof OrderController !== 'undefined') {
+                OrderController.refreshCustomerDropdown();
+            }
         });
         $('#customersTable').on('click', '.btn-edit-cust', e => {
             const id = $(e.currentTarget).data('id');
