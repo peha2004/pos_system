@@ -1,4 +1,4 @@
-// customerModel.js
+// CustomerModel.js
 const CustomerModel = {
     getAll() {
         return DB.customers;

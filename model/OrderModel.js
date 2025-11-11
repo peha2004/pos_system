@@ -1,4 +1,4 @@
-// orderModel.js
+// OrderModel.js
 const OrderModel = {
     getAll() {
         return DB.orders;

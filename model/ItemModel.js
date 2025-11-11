@@ -1,4 +1,4 @@
-// itemModel.js
+// ItemModel.js
 const ItemModel = {
     getAll() {
         return DB.items;

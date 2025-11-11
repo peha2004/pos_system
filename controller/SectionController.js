@@ -1,4 +1,4 @@
-// controller/sectionController.js
+// controller/SectionController.js
 const SectionController = {
     init() {
         this.bindTabEvents();

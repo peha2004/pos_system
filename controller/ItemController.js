@@ -1,4 +1,4 @@
-// controller/itemController.js
+// controller/ItemController.js
 const ItemController = {
     init() {
         this.bindEvents();
