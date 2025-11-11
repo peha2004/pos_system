@@ -1,0 +1,49 @@
+body {
+    background: #f7f7fb;
+    min-height: 100vh;
+}
+.app-shell {
+    max-width: 1200px;
+    margin: 24px auto;
+}
+.hidden {
+    display: none !important;
+}
+
+.nav-section {
+    margin-bottom: 18px;
+}
+
+.card-panel {
+    padding: 18px;
+}
+
+.table-wrap {
+    max-height: 420px;
+    overflow: auto;
+}
+
+.invalid-feedback {
+    display: block;
+}
+
+body.center-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f7f7fb;
+    margin: 0;
+}
+body.center-login .app-shell {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body.center-login #view-login {
+    width: 100%;
+    max-width: 420px;
+}
