@@ -4,7 +4,7 @@ const AppController = {
         DB.seed();
         this.bindLogin();
         this.autoLoginIfSession();
-        $('body').addClass('center-login');
+
     },
     bindLogin() {
         const loginForm = $('#loginForm');
@@ -58,7 +58,13 @@ const AppController = {
 
     autoLoginIfSession() {
         const user = sessionStorage.getItem('pos_user');
-        if (user) this.startApp(user);
+        if (user) {
+            this.startApp(user);
+        } else {
+            $('body').addClass('center-login');
+            $('#view-login').removeClass('hidden');
+            $('#view-app').addClass('hidden');
+        }
     },
 
     startApp(user) {
@@ -72,7 +78,9 @@ const AppController = {
         CustomerController.init();
         ItemController.init();
         OrderController.init();
-        SectionController.refreshDashboard();
+        setTimeout(() => {
+            SectionController.refreshDashboard();
+        }, 300);
     },
 
     showLogin() {
