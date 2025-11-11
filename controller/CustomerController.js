@@ -31,8 +31,9 @@ const CustomerController = {
                 return;
             }
 
-            if (id) CustomerModel.update(id, { name, contact, address });
-            else CustomerModel.add({ name, contact, address });
+            const customerDTO = new CustomerDTO(id || null, name, contact, address);
+            if (id) CustomerModel.update(id, customerDTO);
+            else CustomerModel.add(customerDTO);
 
             bootstrap.Modal.getInstance($('#modalCustomer')).hide();
             this.refresh();
