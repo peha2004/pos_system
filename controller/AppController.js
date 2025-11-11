@@ -4,6 +4,7 @@ const AppController = {
         DB.seed();
         this.bindLogin();
         this.autoLoginIfSession();
+        $('body').addClass('center-login');
     },
     bindLogin() {
         const loginForm = $('#loginForm');
@@ -65,6 +66,8 @@ const AppController = {
         $('#view-login').addClass('hidden');
         $('#view-app').removeClass('hidden');
 
+        $('body').removeClass('center-login');
+
         SectionController.init();
         CustomerController.init();
         ItemController.init();
@@ -76,6 +79,7 @@ const AppController = {
         $('#view-app').addClass('hidden');
         $('#view-login').removeClass('hidden');
         sessionStorage.removeItem('pos_user');
+        $('body').addClass('center-login');
     }
 };
 
