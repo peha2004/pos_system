@@ -10,7 +10,7 @@ const OrderController = {
     },
 
     bindEvents() {
-        $('#btnAddToCart').on('click', () => {
+        $('#btnAddToCart'). on('click', () => {
             const code = $('#orderItem').val();
             const qty = parseInt($('#orderQty').val());
             if (!code || qty < 1) return alert('Invalid selection');
@@ -19,9 +19,11 @@ const OrderController = {
             if (!item || item.qty < qty) return alert('Not enough stock');
 
             const existing = this.cart.find(c => c.code === code);
-            if (existing) existing.qty += qty;
-            else this.cart.push({ code: item.code, name: item.name, qty, unit: item.price });
-
+            if (existing) {
+                alert('This item is already in the cart!');
+                return;
+            }
+            this.cart.push({ code: item.code, name: item.name, qty, unit: item.price });
             this.renderCart();
         });
 
